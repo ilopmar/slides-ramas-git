@@ -1,0 +1,389 @@
+Feature
+
+{
+  "branches": {
+    "master": {
+      "remote": false,
+      "target": "C1",
+      "id": "master",
+      "type": "branch"
+    },
+    "develop": {
+      "remote": false,
+      "target": "C2",
+      "id": "develop",
+      "type": "branch"
+    },
+    "US1111": {
+      "remote": false,
+      "target": "C5",
+      "id": "US1111",
+      "type": "branch"
+    }
+  },
+  "commits": {
+    "C0": {
+      "type": "commit",
+      "parents": [],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 16:23:04 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C0",
+      "rootCommit": true
+    },
+    "C1": {
+      "type": "commit",
+      "parents": [
+        "C0"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 16:23:04 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C1"
+    },
+    "C2": {
+      "type": "commit",
+      "parents": [
+        "C1"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 16:23:16 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C2"
+    },
+    "C3": {
+      "type": "commit",
+      "parents": [
+        "C2"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 16:36:16 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C3"
+    },
+    "C4": {
+      "type": "commit",
+      "parents": [
+        "C3"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 16:36:18 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C4"
+    },
+    "C5": {
+      "type": "commit",
+      "parents": [
+        "C4"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 16:36:19 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C5"
+    }
+  },
+  "HEAD": {
+    "id": "HEAD",
+    "target": "develop",
+    "type": "general ref"
+  }
+}
+
+-  Yo
+git checkout -b US1111
+git commit
+git commit
+git commit
+git commit
+
+- Compañero
+git checkout US1111
+git merge develop
+git checkout develop
+git merge US1111
+git branch -d US1111
+git push origin develop
+
+-- Yo
+git checkout US9999
+1.-
+ git rebase develop
+ git push origin develop
+2.-
+ git merge develop
+ git checkout develop
+ git merge US9999
+
+
+
+Release
+{
+  "branches": {
+    "master": {
+      "remote": false,
+      "target": "C1",
+      "id": "master",
+      "type": "branch"
+    },
+    "develop": {
+      "remote": false,
+      "target": "US9999",
+      "id": "develop",
+      "type": "branch"
+    },
+    "US7777": {
+      "remote": false,
+      "target": "C5",
+      "id": "US7777",
+      "type": "branch"
+    }
+  },
+  "commits": {
+    "C0": {
+      "type": "commit",
+      "parents": [],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 16:44:35 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C0",
+      "rootCommit": true
+    },
+    "C1": {
+      "type": "commit",
+      "parents": [
+        "C0"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 16:44:35 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C1"
+    },
+    "US1111": {
+      "type": "commit",
+      "parents": [
+        "C1"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 16:44:48 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "US1111"
+    },
+    "US9999": {
+      "type": "commit",
+      "parents": [
+        "US1111"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 16:44:56 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "US9999"
+    },
+    "C4": {
+      "type": "commit",
+      "parents": [
+        "US1111"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 16:47:39 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C4"
+    },
+    "C5": {
+      "type": "commit",
+      "parents": [
+        "C4"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 16:47:42 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C5"
+    }
+  },
+  "HEAD": {
+    "id": "HEAD",
+    "target": "US7777",
+    "type": "general ref"
+  }
+}
+
+-- Yo
+git checkout develop
+git checkout -b release_1.06.00
+git commit -m "updated version"
+git push -u origin relase_1.06.00
+
+-- Otro
+Nuevas cosas en develop
+git checkout develop
+git checkout -b US5555
+git commit
+
+-- Estabilizar la rama
+git checkout release_1.06.00
+git commit
+git commit
+
+-- Antes de finalizarla, cherry-pick pq hay algo importante
+git checkout develop
+git cherry-pick "un-commit-de-release"
+
+-- Finalizar la rama
+git checkout release_1.06.00
+git merge master
+git checkout master
+git merge --no-ff release_1.06.00
+git push origin master
+git tag -a 1.06.00
+git push --tags
+
+Hotfix
+{
+  "branches": {
+    "master": {
+      "remote": false,
+      "target": "C1",
+      "id": "master",
+      "type": "branch"
+    },
+    "develop": {
+      "remote": false,
+      "target": "C2",
+      "id": "develop",
+      "type": "branch"
+    },
+    "US2222": {
+      "remote": false,
+      "target": "C3",
+      "id": "US2222",
+      "type": "branch"
+    },
+    "US3333": {
+      "remote": false,
+      "target": "C5",
+      "id": "US3333",
+      "type": "branch"
+    },
+    "R10600": {
+      "remote": false,
+      "target": "C8",
+      "id": "R10600",
+      "type": "branch"
+    }
+  },
+  "commits": {
+    "C0": {
+      "type": "commit",
+      "parents": [],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 17:01:26 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C0",
+      "rootCommit": true
+    },
+    "C1": {
+      "type": "commit",
+      "parents": [
+        "C0"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 17:01:26 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C1"
+    },
+    "C2": {
+      "type": "commit",
+      "parents": [
+        "C1"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 17:01:50 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C2"
+    },
+    "C3": {
+      "type": "commit",
+      "parents": [
+        "C2"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 17:02:15 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C3"
+    },
+    "C4": {
+      "type": "commit",
+      "parents": [
+        "C2"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 17:02:30 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C4"
+    },
+    "C5": {
+      "type": "commit",
+      "parents": [
+        "C4"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 17:02:31 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C5"
+    },
+    "C6": {
+      "type": "commit",
+      "parents": [
+        "C2"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 17:02:58 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C6"
+    },
+    "C7": {
+      "type": "commit",
+      "parents": [
+        "C6"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 17:03:01 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C7"
+    },
+    "C8": {
+      "type": "commit",
+      "parents": [
+        "C7"
+      ],
+      "author": "Peter Cottle",
+      "createTime": "Sun Jun 02 2013 17:03:02 GMT+0200 (CEST)",
+      "commitMessage": "Quick commit. Go Bears!",
+      "id": "C8"
+    }
+  },
+  "HEAD": {
+    "id": "HEAD",
+    "target": "R10600",
+    "type": "general ref"
+  }
+}
+
+-- Yo
+git checkout master
+git checkout -b BUG6666
+git commit
+git commit
+git rebase -i HEAD~2
+-- master
+git checkout master
+git merge --no-ff BUG6666
+git push origin master
+-- develop
+git checkout develop
+git merge BUG6666
+git push origin develop
+-- release OJO QUE ESTÁ ABIERTA
+git checkout RELEASE
+git merge BUG6666
+-- borrar
+git branch -d BUG6666
